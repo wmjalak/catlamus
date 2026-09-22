@@ -29,7 +29,9 @@ jobs:
         run: npm run check
 
       - name: Package the app
-        run: npm run build
+        # --publish never: electron-builder otherwise detects CI and tries to
+        # publish to a GitHub release, which needs a token we do not want here.
+        run: npm run build -- --publish never
 
       - name: Upload the dmg
         uses: actions/upload-artifact@v4

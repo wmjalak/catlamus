@@ -2,6 +2,13 @@
 
 All notable changes to Catlamus, newest litter first. 🐾
 
+## 1.3.2 — 2026-09-22
+
+### Fixed
+- CI packaged the app fine but then fell over on `GitHub Personal Access Token
+  is not set`: electron-builder detects CI and tries to publish to a GitHub
+  release. The workflow now passes `--publish never`.
+
 ## 1.3.1 — 2026-09-22
 
 ### Fixed

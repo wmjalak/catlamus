@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/icon.iconset/
+*.dmg
+*.app
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Local Claude Code settings (machine-specific paths)
+.claude/settings.local.json
+
+# Python (icon generator)
+__pycache__/
+*.pyc
+.venv/

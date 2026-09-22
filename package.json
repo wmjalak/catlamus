@@ -1,0 +1,76 @@
+{
+  "name": "catlamus",
+  "productName": "Catlamus",
+  "version": "1.3.0",
+  "description": "Catlamus — a Markdown editor for macOS with nine lives and zero clutter",
+  "keywords": [
+    "markdown",
+    "editor",
+    "electron",
+    "macos",
+    "notes",
+    "cat"
+  ],
+  "homepage": "https://github.com/OWNER/catlamus#readme",
+  "bugs": {
+    "url": "https://github.com/OWNER/catlamus/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OWNER/catlamus.git"
+  },
+  "license": "MIT",
+  "author": "Jani Laakso",
+  "main": "main.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "env -u ELECTRON_RUN_AS_NODE electron .",
+    "build": "electron-builder --mac",
+    "postbuild": "bash scripts/free-the-cat.sh",
+    "free": "bash scripts/free-the-cat.sh",
+    "check": "node --check main.js && node --check preload.js && node --check renderer/renderer.js"
+  },
+  "dependencies": {
+    "marked": "^12.0.0"
+  },
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.catlamus.editor",
+    "productName": "Catlamus",
+    "mac": {
+      "identity": null,
+      "icon": "build/icon.png",
+      "category": "public.app-category.productivity",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "dir",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**",
+      "node_modules/**",
+      "!node_modules/electron-builder/**",
+      "!node_modules/.cache/**"
+    ],
+    "directories": {
+      "output": "dist"
+    }
+  }
+}

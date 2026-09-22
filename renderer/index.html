@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catlamus</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside id="sidebar">
+      <div id="titlebar-drag"></div>
+      <div id="sidebar-header">
+        <button id="btn-open-folder" title="Open Folder" class="icon-btn">
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"/>
+          </svg>
+        </button>
+        <button id="btn-new-file" title="New File" class="icon-btn">
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V8z" clip-rule="evenodd"/>
+          </svg>
+        </button>
+      </div>
+      <div id="folder-label"></div>
+      <div id="file-tree"></div>
+    </aside>
+
+    <!-- Resizer sidebar/editor -->
+    <div class="resizer" id="resizer-left"></div>
+
+    <!-- Editor -->
+    <main id="editor-pane">
+      <div id="editor-header">
+        <span id="current-filename">No file open</span>
+        <div id="editor-actions">
+          <span id="save-indicator" class="saved">Saved</span>
+          <div id="mode-toggle">
+            <button id="btn-mode-text" class="mode-btn active">Text</button>
+            <button id="btn-mode-md" class="mode-btn">Markdown</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="toolbar">
+        <button class="tb-btn" data-action="bold" title="Bold (⌘B)"><b>B</b></button>
+        <button class="tb-btn" data-action="italic" title="Italic (⌘I)"><i>I</i></button>
+        <button class="tb-btn" data-action="strike" title="Strikethrough"><s>S</s></button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn" data-action="h1" title="Heading 1">H1</button>
+        <button class="tb-btn" data-action="h2" title="Heading 2">H2</button>
+        <button class="tb-btn" data-action="h3" title="Heading 3">H3</button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn tb-mono" data-action="code" title="Inline Code">`c`</button>
+        <button class="tb-btn tb-mono" data-action="codeblock" title="Code Block">```</button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn" data-action="link" title="Link (⌘K)">[url]</button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn" data-action="ul" title="Bullet List">• —</button>
+        <button class="tb-btn" data-action="ol" title="Numbered List">1. —</button>
+        <button class="tb-btn" data-action="quote" title="Blockquote">&gt; —</button>
+        <span class="tb-sep"></span>
+        <button class="tb-btn tb-mono" data-action="hr" title="Horizontal Rule">───</button>
+      </div>
+
+      <div id="editor-body">
+        <div id="search-bar" hidden>
+          <input id="search-input" type="text" placeholder="Find" spellcheck="false" />
+          <span id="search-count"></span>
+          <button id="search-prev" class="search-btn" title="Previous Match (⇧⌘G)">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <button id="search-next" class="search-btn" title="Next Match (⌘G)">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <button id="search-close" class="search-btn" title="Close (Esc)">
+            <svg viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+        </div>
+        <div id="editor-highlights" aria-hidden="true"></div>
+        <textarea id="editor" placeholder="Open a folder and select a .md file to start editing…" spellcheck="false"></textarea>
+        <div class="resizer" id="resizer-center"></div>
+        <div id="md-split-view">
+          <div id="md-split-content"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Context menu -->
+  <div id="context-menu">
+    <div class="ctx-item" id="ctx-rename">Rename</div>
+    <div class="ctx-separator"></div>
+    <div class="ctx-item ctx-danger" id="ctx-delete">Delete</div>
+  </div>
+
+  <script src="../node_modules/marked/marked.min.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

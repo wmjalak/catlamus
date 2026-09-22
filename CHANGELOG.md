@@ -2,6 +2,13 @@
 
 All notable changes to Catlamus, newest litter first. 🐾
 
+## 1.3.3 — 2026-09-22
+
+### Changed
+- Bumped the CI actions from v4 to v7 (`checkout`, `setup-node`,
+  `upload-artifact`), clearing the warning that they were being forced off the
+  deprecated Node 20 runtime onto Node 24.
+
 ## 1.3.2 — 2026-09-22
 
 ### Fixed

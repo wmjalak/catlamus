@@ -1,0 +1,24 @@
+name: 😺 Feature request
+description: Suggest a new trick for Catlamus.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The itch you cannot scratch with Catlamus today.
+    validations:
+      required: true
+
+  - type: textarea
+    id: idea
+    attributes:
+      label: What should Catlamus do instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Anything else?
+      description: Workarounds you use today, or other editors that get this right.

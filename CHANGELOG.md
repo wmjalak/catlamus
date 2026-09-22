@@ -2,6 +2,21 @@
 
 All notable changes to Catlamus, newest litter first. 🐾
 
+## 1.3.1 — 2026-09-22
+
+### Fixed
+- `package-lock.json` pointed 346 of its packages at an internal Artifactory
+  mirror, so `npm ci` failed with `ENOTFOUND` for anyone outside that network —
+  including CI. All `resolved` URLs now point at `registry.npmjs.org`; the
+  integrity hashes were unchanged and still verify.
+- Replaced the `OWNER` placeholder in the `package.json` repository, homepage and
+  bugs URLs and in the README CI badge with the real `wmjalak` repository.
+
+### Added
+- The `.github/` litter the 1.3.0 notes promised but never shipped: a CI workflow
+  that installs, syntax-checks and packages the app on macOS and uploads the dmg,
+  plus bug-report and feature-request issue forms and a pull-request template.
+
 ## 1.3.0 — 2026-09-22
 
 ### Added

@@ -2,7 +2,7 @@
 
 A lightweight Markdown editor for macOS, built with Electron. Nine lives, zero clutter.
 
-[![CI](https://github.com/OWNER/catlamus/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/catlamus/actions/workflows/ci.yml)
+[![CI](https://github.com/wmjalak/catlamus/actions/workflows/ci.yml/badge.svg)](https://github.com/wmjalak/catlamus/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ## Features

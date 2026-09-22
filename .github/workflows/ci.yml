@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  prowl:
+    name: Install, check and package
+    runs-on: macos-latest
+
+    steps:
+      - name: Check out the litter
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Syntax check
+        run: npm run check
+
+      - name: Package the app
+        run: npm run build
+
+      - name: Upload the dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: catlamus-dmg
+          path: dist/*.dmg
+          if-no-files-found: error
+          retention-days: 14
